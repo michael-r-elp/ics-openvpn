@@ -62,6 +62,7 @@
     <string name="clear_log">Protokoll löschen</string>
     <string name="title_cancel">Trennen bestätigen</string>
     <string name="cancel_connection_query">Möchten Sie das VPN trennen bzw. den Verbindungsversuch abbrechen?</string>
+    <string name="reconnect_connection_query">Möchten Sie das VPN erneut verbinden bzw. den Verbindungsversuch abbrechen?</string>
     <string name="remove_vpn">VPN löschen</string>
     <string name="check_remote_tlscert">Überprüfen, ob der Server ein Zertifikat mit TLS-Servererweiterungen verwendet (--remote-cert-tls server)</string>
     <string name="check_remote_tlscert_title">TLS-Serverzertifikat erwarten</string>
@@ -96,6 +97,7 @@
     <string name="custom_options_title">Eigene Optionen</string>
     <string name="edit_vpn">VPN-Einstellungen ändern</string>
     <string name="remove_vpn_query">VPN-Profil \'%s\' löschen?</string>
+    <string name="remove_vpn_query_unavailable">Löschen des VPN-Profils deaktiviert durch den Administrator</string>
     <string name="tun_error_helpful">Auf manchen Custom-ROM-Version sind eventuell die Zugriffsrechte von /dev/tun falsch oder das tun-Kernelmodul fehlt. Für Cyanogenmod 9-ROMs mit Root finden Sie einen provisorischen Fix in den allgemeinen Einstellungen.</string>
     <string name="tun_open_error">Die tun-Schnittstelle konnte nicht geöffnet werden</string>
     <string name="error">"Fehler: "</string>

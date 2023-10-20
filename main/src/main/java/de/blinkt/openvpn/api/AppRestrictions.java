@@ -147,6 +147,40 @@ public class AppRestrictions {
             editor.putBoolean("screenoff", pauseVPN);
             editor.apply();
         }
+
+        if(restrictions.containsKey("preventdisconnect"))
+        {
+            boolean preventDisconnect = restrictions.getBoolean("preventdisconnect");
+            SharedPreferences.Editor editor = defaultPrefs.edit();
+            editor.putBoolean("preventdisconnect", preventDisconnect);
+            editor.apply();
+        }
+
+        if(restrictions.containsKey("hidesettingstab"))
+        {
+            boolean hidesettingstab = restrictions.getBoolean("hidesettingstab");
+            SharedPreferences.Editor editor = defaultPrefs.edit();
+            editor.putBoolean("hidesettingstab", hidesettingstab);
+            editor.apply();
+        }
+
+        if(restrictions.containsKey("preventprofiledeletion"))
+        {
+            boolean preventprofiledeletion = restrictions.getBoolean("preventprofiledeletion");
+            SharedPreferences.Editor editor = defaultPrefs.edit();
+            editor.putBoolean("preventprofiledeletion", preventprofiledeletion);
+            editor.apply();
+        }
+
+        /*
+        if(restrictions.containsKey("appaccesspw"))
+        {
+            String appaccesspw = restrictions.getString("appaccesspw");
+            SharedPreferences.Editor editor = defaultPrefs.edit();
+            editor.putString("appaccesspw", appaccesspw);
+            editor.apply();
+        }
+        */
     }
 
     private void importVPNProfiles(Context c, Bundle restrictions, Parcelable[] profileList) {

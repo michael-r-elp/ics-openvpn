@@ -73,6 +73,24 @@
             android:restrictionType="bool"
             android:title="@string/restriction_pausevpn" />
     <restriction
+        android:key="preventdisconnect"
+        android:restrictionType="bool"
+        android:title="@string/restriction_preventdisconnect" />
+    <restriction
+        android:key="hidesettingstab"
+        android:restrictionType="bool"
+        android:title="@string/restriction_hidesettings" />
+    <restriction
+        android:key="preventprofiledeletion"
+        android:restrictionType="bool"
+        android:title="@string/restriction_preventprofiledeletion" />
+    <!--
+    <restriction
+        android:key="appaccesspw"
+        android:restrictionType="string"
+        android:title="@string/restriction_appaccesspw" />
+    -->
+    <restriction
             android:description="@string/apprest_aidl_list"
             android:key="allowed_remote_access"
             android:restrictionType="string"

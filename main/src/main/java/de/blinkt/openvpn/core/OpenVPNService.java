@@ -414,6 +414,19 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
     }
 
     private void addVpnActionsToNotification(Notification.Builder nbuilder) {
+        SharedPreferences prefs = Preferences.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("preventdisconnect", false))
+        {
+            Intent disconnectVPN = new Intent(this, DisconnectVPN.class);
+            disconnectVPN.setAction(DISCONNECT_VPN);
+            PendingIntent disconnectPendingIntent = PendingIntent.getActivity(this, 0, disconnectVPN, PendingIntent.FLAG_IMMUTABLE);
+
+            nbuilder.addAction(R.drawable.ic_menu_close_clear_cancel,
+                    getString(R.string.reconnect), disconnectPendingIntent);
+
+            return;
+        }
+
         Intent disconnectVPN = new Intent(this, DisconnectVPN.class);
         disconnectVPN.setAction(DISCONNECT_VPN);
         PendingIntent disconnectPendingIntent = PendingIntent.getActivity(this, 0, disconnectVPN, PendingIntent.FLAG_IMMUTABLE);
@@ -435,7 +448,6 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
                     getString(R.string.resumevpn), resumeVPNPending);
         }
     }
-
     PendingIntent getUserInputIntent(String needed) {
         Intent intent = new Intent(getApplicationContext(), LaunchVPN.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

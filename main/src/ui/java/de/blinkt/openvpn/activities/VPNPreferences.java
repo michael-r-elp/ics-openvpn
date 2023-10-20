@@ -8,6 +8,7 @@ package de.blinkt.openvpn.activities;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -20,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.VpnProfile;
+import de.blinkt.openvpn.core.Preferences;
 import de.blinkt.openvpn.core.ProfileManager;
 import de.blinkt.openvpn.fragments.Settings_Allowed_Apps;
 import de.blinkt.openvpn.fragments.Settings_Authentication;
@@ -151,7 +153,8 @@ public class VPNPreferences extends BaseActivity {
         } else {
             mPagerAdapter.addTab(R.string.basic, Settings_UserEditable.class);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        SharedPreferences prefs = Preferences.getDefaultSharedPreferences(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && !prefs.getBoolean("hidesettingstab", false)) {
             mPagerAdapter.addTab(R.string.vpn_allowed_apps, Settings_Allowed_Apps.class);
         }
         mPagerAdapter.addTab(R.string.generated_config, ShowConfigFragment.class);
@@ -196,11 +199,20 @@ public class VPNPreferences extends BaseActivity {
 
 	private void askProfileRemoval() {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setTitle("Confirm deletion");
-		dialog.setMessage(getString(R.string.remove_vpn_query, mProfile.mName));
+        SharedPreferences prefs = Preferences.getDefaultSharedPreferences(this);
+        if(prefs.getBoolean("preventprofiledeletion", false))
+        {
+            dialog.setTitle("Deletion Unavailable");
+            dialog.setMessage(getString(R.string.remove_vpn_query_unavailable));
+        }
+        else
+        {
+            dialog.setTitle("Confirm deletion");
+            dialog.setMessage(getString(R.string.remove_vpn_query, mProfile.mName));
 
-		dialog.setPositiveButton(android.R.string.yes,
-                (dialog1, which) -> removeProfile(mProfile));
+            dialog.setPositiveButton(android.R.string.yes,
+                    (dialog1, which) -> removeProfile(mProfile));
+        }
 		dialog.setNegativeButton(android.R.string.no,null);
 		dialog.create().show();
 	}

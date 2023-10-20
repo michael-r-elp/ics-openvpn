@@ -5,17 +5,19 @@
 package de.blinkt.openvpn.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import de.blinkt.openvpn.R
+import de.blinkt.openvpn.core.Preferences
 import de.blinkt.openvpn.fragments.*
 import de.blinkt.openvpn.fragments.ImportRemoteConfig.Companion.newInstance
 import de.blinkt.openvpn.views.ScreenSlidePagerAdapter
+
 
 class MainActivity : BaseActivity() {
     private lateinit var mPager: ViewPager
@@ -32,7 +34,10 @@ class MainActivity : BaseActivity() {
         /* Toolbar and slider should have the same elevation */disableToolbarElevation()
         mPagerAdapter.addTab(R.string.vpn_list_title, VPNProfileList::class.java)
         mPagerAdapter.addTab(R.string.graph, GraphFragment::class.java)
-        mPagerAdapter.addTab(R.string.generalsettings, GeneralSettings::class.java)
+        val prefs = Preferences.getDefaultSharedPreferences(this)
+        if (!prefs.getBoolean("hidesettingstab", false)) {
+            mPagerAdapter.addTab(R.string.generalsettings, GeneralSettings::class.java)
+        }
         mPagerAdapter.addTab(R.string.faq, FaqFragment::class.java)
         if (SendDumpFragment.getLastestDump(this) != null) {
             mPagerAdapter.addTab(R.string.crashdump, SendDumpFragment::class.java)

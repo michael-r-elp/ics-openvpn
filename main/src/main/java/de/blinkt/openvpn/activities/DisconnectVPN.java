@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.RemoteException;
 
@@ -19,6 +20,7 @@ import de.blinkt.openvpn.LaunchVPN;
 import de.blinkt.openvpn.R;
 import de.blinkt.openvpn.core.IOpenVPNServiceInternal;
 import de.blinkt.openvpn.core.OpenVPNService;
+import de.blinkt.openvpn.core.Preferences;
 import de.blinkt.openvpn.core.ProfileManager;
 import de.blinkt.openvpn.core.VpnStatus;
 
@@ -63,9 +65,18 @@ public class DisconnectVPN extends Activity implements DialogInterface.OnClickLi
     private void showDisconnectDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.title_cancel);
-        builder.setMessage(R.string.cancel_connection_query);
-        builder.setNegativeButton(android.R.string.cancel, this);
-        builder.setPositiveButton(R.string.cancel_connection, this);
+        SharedPreferences prefs = Preferences.getDefaultSharedPreferences(this);
+        if (prefs.getBoolean("preventdisconnect", false))
+        {
+            builder.setMessage(R.string.reconnect_connection_query);
+            builder.setNegativeButton(android.R.string.cancel, this);
+        }
+        else
+        {
+            builder.setMessage(R.string.cancel_connection_query);
+            builder.setNegativeButton(android.R.string.cancel, this);
+            builder.setPositiveButton(R.string.cancel_connection, this);
+        }
         builder.setNeutralButton(R.string.reconnect, this);
         builder.setOnCancelListener(this);
 
