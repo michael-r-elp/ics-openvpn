@@ -62,7 +62,8 @@
     <string name="clear_log">Protokoll löschen</string>
     <string name="title_cancel">Trennen bestätigen</string>
     <string name="cancel_connection_query">Möchten Sie das VPN trennen bzw. den Verbindungsversuch abbrechen?</string>
-    <string name="reconnect_connection_query">Möchten Sie das VPN erneut verbinden bzw. den Verbindungsversuch abbrechen?</string>
+    <string name="title_reconnect">Neuverbinden bestätigen</string>
+    <string name="reconnect_connection_query">Möchten Sie das VPN erneut verbinden?</string>
     <string name="remove_vpn">VPN löschen</string>
     <string name="check_remote_tlscert">Überprüfen, ob der Server ein Zertifikat mit TLS-Servererweiterungen verwendet (--remote-cert-tls server)</string>
     <string name="check_remote_tlscert_title">TLS-Serverzertifikat erwarten</string>
